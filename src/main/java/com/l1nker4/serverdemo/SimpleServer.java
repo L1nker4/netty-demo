@@ -9,7 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 
-public class HelloServer {
+public class SimpleServer {
 
     public static void main(String[] args) {
         /**
@@ -22,6 +22,7 @@ public class HelloServer {
                 .group(new NioEventLoopGroup())
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                    //连接建立后执行initChannel
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         //StringDecoder：将Bytebuffer转为string
@@ -34,7 +35,7 @@ public class HelloServer {
                             }
                         });
                     }
-                }).bind(8080);
-
+                })
+                .bind(8080);
     }
 }
